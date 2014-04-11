@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.kitchen.second.mapper.employee.EmployeeMapper">
+     
+    <select id="selectEmployee" parameterType="ParamEmployee" resultType="ResultEmployee">
+        SELECT <!-- selectEmployee -->
+               id
+             , firstName
+             , lastName
+             , managerId
+             , managerName
+             , title
+             , department
+             , cellPhone
+             , officePhone
+             , email
+             , city
+             , pic
+             , twitterId
+             , blog
+             , regdate
+          FROM employee
+         WHERE id = #{id}
+    </select>
+
+    <select id="selectEmployeeList" parameterType="ParamEmployee" resultType="ResultEmployee">
+    <![CDATA[
+        SELECT id
+             , firstName
+             , lastName
+             , managerId
+             , managerName
+             , title
+             , department
+             , cellPhone
+             , officePhone
+             , email
+             , city
+             , pic
+             , twitterId
+             , blog
+             , regdate
+          FROM employee
+         WHERE 1=1
+	]]>
+		<if test="id != null">
+		   AND id = #{id}
+		</if>
+		<if test="firstName != null">
+		   AND firstName = #{firstName}
+		</if>
+    </select>
+    
+    <insert id="addEmployee" parameterType="ParamEmployee">
+		INSERT <!-- addEmployee -->
+		  INTO account
+		     (
+		       id
+             , firstName
+             , lastName
+             , managerId
+             , managerName
+             , title
+             , department
+             , cellPhone
+             , officePhone
+             , email
+             , city
+             , pic
+             , twitterId
+             , blog
+             , regdate
+		     )
+		VALUES 
+		     (
+		       #{id}
+             , #{firstName}
+             , #{lastName}
+             , #{managerId}
+             , #{managerName}
+             , #{title}
+             , #{department}
+             , #{cellPhone}
+             , #{officePhone}
+             , #{email}
+             , #{city}
+             , #{pic}
+             , #{twitterId}
+             , #{blog}
+		     , now()  
+		     ) 
+    </insert>
+
+    <delete id="deleteEmployee" parameterType="ParamEmployee">
+		DELETE <!-- deleteEmployee -->
+		  FROM employee
+		 WHERE id = #{id}
+    </delete>
+    
+</mapper>
